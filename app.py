@@ -518,18 +518,11 @@ def prepare_cloud(click_data):
 def generate_cloud(json_data):
     json_data = json.loads(json_data)
     print('JSON Data: ', json_data)
-    #Find out if running locally
-    if 'TERM_PROGRAM' in os.environ:
-        print('Running locally.')
-        index = 3
-    else:
-        index = 0
-
     #Create wordcloud out of first cluster if no cluster provided
     if json_data is None:
         cluster_number = 1
     else:
-        cluster_number = json_data['points'][0]['customdata'][index]
+        cluster_number = json_data['points'][0]['customdata'][0]
         print('Showing Cluster: ', cluster_number)
 
     data = embed_df[embed_df.Cluster == cluster_number]['Synopsis']
